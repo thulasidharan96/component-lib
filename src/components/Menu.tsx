@@ -8,7 +8,7 @@ export type MenuProps = FMenuProps & { vars?: CSSVarValues; style?: CSSPropertie
 export function Menu({ vars, style, items, children, ...props }: MenuProps) {
   return (
     <FMenu {...props}>
-      <MenuTrigger>{children}</MenuTrigger>
+      <MenuTrigger>{(triggerProps) => <span {...triggerProps}>{children as any}</span>}</MenuTrigger>
       <MenuPopover style={mergeStyleVars(style, vars)}>
         <MenuList>
           {items?.map((i) => (

@@ -22,7 +22,7 @@ export function Toolbar({ vars, style, items, children, ...props }: ToolbarProps
                 </ToolbarButton>
               );
             return (
-              <ToolbarToggleButton key={i.key} onClick={i.onClick} defaultPressed={i.defaultPressed}>
+              <ToolbarToggleButton key={i.key} onClick={i.onClick}>
                 {i.content}
               </ToolbarToggleButton>
             );

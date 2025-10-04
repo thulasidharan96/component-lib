@@ -123,6 +123,20 @@ export default function Login() {
 
 Recommended: enable 2FA on your npm account.
 
+## Host demo on GitHub Pages
+
+This repo includes a demo single-page site showcasing every component under `demo/`.
+
+Build the site into `docs/` (GitHub Pages default):
+
+```bash
+npm run build:site
+```
+
+Then enable GitHub Pages:
+
+- Settings → Pages → Build and deployment → Deploy from branch → select `docs/` folder on your default branch.
+
 ## Development
 
 - Build: `npm run build`

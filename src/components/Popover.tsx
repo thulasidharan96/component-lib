@@ -7,7 +7,7 @@ export type PopoverProps = PropsWithChildren<FPopoverProps & { vars?: CSSVarValu
 export function Popover({ vars, style, content, children, ...props }: PopoverProps) {
   return (
     <FPopover {...props}>
-      <PopoverTrigger>{children}</PopoverTrigger>
+      <PopoverTrigger>{(triggerProps) => <span {...triggerProps}>{children}</span>}</PopoverTrigger>
       <PopoverSurface style={mergeStyleVars(style, vars)}>{content}</PopoverSurface>
     </FPopover>
   );

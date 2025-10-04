@@ -1,4 +1,4 @@
-import { RadioGroup as FRadioGroup, Radio, type RadioGroupProps as FRadioGroupProps } from '@fluentui/react-components';
+import { RadioGroup as FRadioGroup, Radio, Label, type RadioGroupProps as FRadioGroupProps } from '@fluentui/react-components';
 import type { CSSProperties, ReactNode } from 'react';
 import { mergeStyleVars, type CSSVarValues } from '../utils/styleVars';
 
@@ -15,7 +15,7 @@ export function RadioGroup({ vars, style, options, children, ...props }: RadioGr
     <FRadioGroup style={mergeStyleVars(style, vars)} {...props}>
       {options
         ? options.map((opt) => (
-            <Radio key={opt.value} value={opt.value} label={opt.label} disabled={opt.disabled} />
+            <Radio key={opt.value} value={opt.value} label={{ children: <Label>{opt.label}</Label> }} disabled={opt.disabled} />
           ))
         : children}
     </FRadioGroup>

@@ -1,37 +1,30 @@
 import { useToastController, Toaster } from '@fluentui/react-components';
-import { useId, useMemo } from 'react';
+import React, { useId, useMemo } from 'react';
 
 export type NotifyHandle = {
   success: (title: string, body?: string) => void;
   error: (title: string, body?: string) => void;
   info: (title: string, body?: string) => void;
   warning: (title: string, body?: string) => void;
-  Toaster: () => JSX.Element;
+  Toaster: () => React.ReactElement;
 };
 
 export function useNotify(): NotifyHandle {
-  const toasterId = useId('toaster-');
+  const toasterId = useId();
   const { dispatchToast } = useToastController(toasterId);
 
   function show(kind: 'success' | 'error' | 'info' | 'warning', title: string, body?: string) {
-    dispatchToast(
-      {
-        intent: kind,
-        title,
-        body
-      } as any,
-      { position: 'top-end' as any }
-    );
+    dispatchToast({ body, title } as any, { position: 'top-end' as any, intent: kind as any });
   }
 
-  return useMemo(
-    () => ({
-      success: (t, b) => show('success', t, b),
-      error: (t, b) => show('error', t, b),
-      info: (t, b) => show('info', t, b),
-      warning: (t, b) => show('warning', t, b),
-      Toaster: () => <Toaster toasterId={toasterId} />
-    }),
-    [toasterId]
-  );
+  return useMemo(() => {
+    const ToasterComponent = () => React.createElement(Toaster as any, { toasterId });
+    return {
+      success: (t: string, b?: string) => show('success', t, b),
+      error: (t: string, b?: string) => show('error', t, b),
+      info: (t: string, b?: string) => show('info', t, b),
+      warning: (t: string, b?: string) => show('warning', t, b),
+      Toaster: ToasterComponent,
+    } as const;
+  }, [toasterId]);
 }
