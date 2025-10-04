@@ -33,21 +33,41 @@ import {
   DataTable,
   Pagination,
   useNotify,
+  Breadcrumbs,
+  Drawer,
+  H1,
+  H2,
+  H3,
+  Subtle,
+  Text,
+  LoginPage,
 } from '@org/ui';
 
 export function App() {
   const notify = useNotify();
   const [open, setOpen] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [page, setPage] = React.useState(2);
+  const [theme, setTheme] = React.useState<'light' | 'dark'>('light');
   return (
-    <OrgProvider>
+    <OrgProvider theme={theme}>
       <notify.Toaster />
       <div style={{ padding: 24 }}>
         <Stack direction="column" gap="24px">
-          <h1>@org/ui Demo</h1>
+          <H1>@org/ui Demo</H1>
 
           <Card>
-            <h2>Buttons</h2>
+            <H2>Theming</H2>
+            <Stack gap="12px" align="center">
+              <ToggleButton onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}>
+                Theme: {theme}
+              </ToggleButton>
+              <Button vars={{ '--org-radius-md': '18px' }}>Radius via CSS var</Button>
+            </Stack>
+          </Card>
+
+          <Card>
+            <H2>Buttons</H2>
             <Stack gap="12px">
               <Button>Default</Button>
               <Button appearance="primary">Primary</Button>
@@ -57,7 +77,7 @@ export function App() {
           </Card>
 
           <Card>
-            <h2>Inputs</h2>
+            <H2>Inputs</H2>
             <Stack direction="column" gap="12px">
               <Field label="Email" description="We won't share it">
                 <Input placeholder="email@example.com" />
@@ -77,13 +97,14 @@ export function App() {
           </Card>
 
           <Card>
-            <h2>Navigation</h2>
+            <H2>Navigation</H2>
             <Tabs defaultSelectedValue="one" tabs={[{ key: 'one', content: 'Tab One' }, { key: 'two', content: 'Tab Two' }]} />
             <Accordion items={[{ value: 'a', header: 'Section A', content: 'Alpha' }, { value: 'b', header: 'Section B', content: 'Beta' }]} />
+            <Breadcrumbs items={[{ key: 'home', text: 'Home' }, { key: 'prod', text: 'Products' }, { key: 'shoes', text: 'Shoes' }]} />
           </Card>
 
           <Card>
-            <h2>Overlays</h2>
+            <H2>Overlays</H2>
             <Stack gap="12px">
               <Popover content={<div>Popover content</div>}>
                 <Button>Popover</Button>
@@ -99,11 +120,15 @@ export function App() {
               <DialogBox open={open} onOpenChange={setOpen} title="Confirm" onPrimary={() => setOpen(false)} onSecondary={() => setOpen(false)}>
                 Are you sure?
               </DialogBox>
+              <Button onClick={() => setDrawerOpen(true)}>Open Drawer</Button>
+              <Drawer open={drawerOpen} onOpenChange={(_, d) => setDrawerOpen(d.open)} title="Drawer">
+                Drawer content
+              </Drawer>
             </Stack>
           </Card>
 
           <Card>
-            <h2>Display & Misc</h2>
+            <H2>Display & Misc</H2>
             <Stack gap="12px" align="center">
               <Avatar name="Jane Doe" />
               <Badge>New</Badge>
@@ -115,16 +140,34 @@ export function App() {
               <Divider />
               <Toolbar items={[{ type: 'button', key: 'save', content: 'Save' }, { type: 'divider', key: 'd' }, { type: 'toggle', key: 'bold', content: 'Bold' }]} />
             </Stack>
+            <Divider />
+            <H3>Typography</H3>
+            <Stack direction="column" gap="6px">
+              <H1>Heading 1</H1>
+              <H2>Heading 2</H2>
+              <H3>Heading 3</H3>
+              <Subtle>Subtle text</Subtle>
+              <Text>Body text example</Text>
+            </Stack>
           </Card>
 
           <Card>
-            <h2>Table & Pagination</h2>
+            <H2>Table & Pagination</H2>
             <DataTable
               items={[{ id: '1', name: 'Alice' }, { id: '2', name: 'Bob' }]}
               columns={[{ id: 'name', header: 'Name', cell: (r: any) => r.name }]}
               getRowId={(r: any) => r.id}
             />
             <Pagination page={page} totalPages={5} onChange={setPage} />
+          </Card>
+
+          <Card>
+            <H2>Template: LoginPage</H2>
+            <LoginPage
+              title="Sign in"
+              subtitle="Use your work email"
+              onSubmit={({ email, password }) => notify.info('Login submit', `${email}/${password}`)}
+            />
           </Card>
         </Stack>
       </div>
