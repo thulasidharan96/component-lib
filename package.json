@@ -18,6 +18,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && vite build",
+    "build:site": "vite build --config demo/vite.config.ts",
     "dev": "vite",
     "test": "vitest run --reporter=verbose",
     "test:watch": "vitest",

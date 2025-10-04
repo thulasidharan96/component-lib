@@ -1,5 +1,5 @@
 import { useToastController, Toaster } from '@fluentui/react-components';
-import { useId, useMemo } from 'react';
+import React, { useId, useMemo } from 'react';
 
 export type NotifyHandle = {
   success: (title: string, body?: string) => void;
@@ -24,14 +24,14 @@ export function useNotify(): NotifyHandle {
     );
   }
 
-  return useMemo(
-    () => ({
-      success: (t, b) => show('success', t, b),
-      error: (t, b) => show('error', t, b),
-      info: (t, b) => show('info', t, b),
-      warning: (t, b) => show('warning', t, b),
-      Toaster: () => <Toaster toasterId={toasterId} />
-    }),
-    [toasterId]
-  );
+  return useMemo(() => {
+    const ToasterComponent = () => React.createElement(Toaster as any, { toasterId });
+    return {
+      success: (t: string, b?: string) => show('success', t, b),
+      error: (t: string, b?: string) => show('error', t, b),
+      info: (t: string, b?: string) => show('info', t, b),
+      warning: (t: string, b?: string) => show('warning', t, b),
+      Toaster: ToasterComponent,
+    } as const;
+  }, [toasterId]);
 }
