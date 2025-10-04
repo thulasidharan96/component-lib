@@ -4,6 +4,8 @@ import { Layout } from './Layout';
 import { Overview } from './pages/Overview';
 import { Theming } from './pages/Theming';
 import { ComponentsPage } from './pages/Components';
+import { Templates } from './pages/Templates';
+import { Utilities } from './pages/Utilities';
 import { OrgProvider, ToggleButton, H1 } from '@org/ui';
 
 export function App() {
@@ -25,6 +27,8 @@ export function App() {
               <NavLink to="/">Overview</NavLink>
               <NavLink to="/theming">Theming</NavLink>
               <NavLink to="/components">Components</NavLink>
+              <NavLink to="/templates">Templates</NavLink>
+              <NavLink to="/utilities">Utilities</NavLink>
             </nav>
           }
         >
@@ -32,6 +36,8 @@ export function App() {
             <Route path="/" element={<Overview />} />
             <Route path="/theming" element={<Theming />} />
             <Route path="/components" element={<ComponentsPage />} />
+            <Route path="/templates" element={<Templates />} />
+            <Route path="/utilities" element={<Utilities />} />
           </Routes>
         </Layout>
       </OrgProvider>
