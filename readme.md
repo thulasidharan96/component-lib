@@ -85,6 +85,12 @@ You can also override Fluent UI theme tokens via `OrgProvider`:
 npm test
 ```
 
+## Components Guide
+
+See detailed usage for every component, templating, and theming in:
+
+- `docs/COMPONENTS.md`
+
 ## Templates
 
 ### LoginPage
