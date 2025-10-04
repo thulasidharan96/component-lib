@@ -6,22 +6,15 @@ export type NotifyHandle = {
   error: (title: string, body?: string) => void;
   info: (title: string, body?: string) => void;
   warning: (title: string, body?: string) => void;
-  Toaster: () => JSX.Element;
+  Toaster: () => React.ReactElement;
 };
 
 export function useNotify(): NotifyHandle {
-  const toasterId = useId('toaster-');
+  const toasterId = useId();
   const { dispatchToast } = useToastController(toasterId);
 
   function show(kind: 'success' | 'error' | 'info' | 'warning', title: string, body?: string) {
-    dispatchToast(
-      {
-        intent: kind,
-        title,
-        body
-      } as any,
-      { position: 'top-end' as any }
-    );
+    dispatchToast({ body, title } as any, { position: 'top-end' as any, intent: kind as any });
   }
 
   return useMemo(() => {

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbDivider, BreadcrumbButton, type BreadcrumbProps } from '@fluentui/react-components';
 import type { CSSProperties } from 'react';
 import { mergeStyleVars, type CSSVarValues } from '../utils/styleVars';
@@ -10,10 +11,14 @@ export function Breadcrumbs({ items, vars, style, children, ...props }: Breadcru
     <Breadcrumb style={mergeStyleVars(style, vars)} {...props}>
       {items
         ? items.map((c, i) => (
-            <BreadcrumbItem key={c.key} current={i === items.length - 1}>
-              <BreadcrumbButton onClick={c.onClick}>{c.text}</BreadcrumbButton>
+            <React.Fragment key={c.key}>
+              <BreadcrumbItem>
+                <BreadcrumbButton onClick={c.onClick} aria-current={i === items.length - 1 ? 'page' : undefined}>
+                  {c.text}
+                </BreadcrumbButton>
+              </BreadcrumbItem>
               {i < items.length - 1 && <BreadcrumbDivider />}
-            </BreadcrumbItem>
+            </React.Fragment>
           ))
         : children}
     </Breadcrumb>
