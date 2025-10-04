@@ -5,6 +5,7 @@ import {
   Tabs, Accordion, Breadcrumbs, Link, Divider, Skeleton, Toolbar, Popover, Menu, Dialog, DialogTrigger, DialogBox,
   DataTable, Pagination, Drawer, H2, H3, Subtle, Text
 } from '@org/ui';
+import { CodeBlock } from '../components/CodeBlock';
 
 export function ComponentsPage() {
   const [open, setOpen] = React.useState(false);
@@ -20,6 +21,7 @@ export function ComponentsPage() {
           <Button appearance="primary">Primary</Button>
           <ToggleButton>Toggle</ToggleButton>
         </Stack>
+        <CodeBlock code={`<Button>Default</Button>\n<Button appearance=\"primary\">Primary</Button>\n<ToggleButton>Toggle</ToggleButton>`} />
       </Card>
 
       <Card>
@@ -33,6 +35,7 @@ export function ComponentsPage() {
           <Combobox options={[{ key: 'ap', text: 'Apple' }, { key: 'bn', text: 'Banana' }]} defaultOpen />
           <Select options={[{ key: '1', text: 'One' }, { key: '2', text: 'Two' }]} defaultValue="1" />
         </Stack>
+        <CodeBlock code={`<Field label=\"Email\"><Input placeholder=\"email@example.com\" /></Field>\n<Field label=\"Message\"><Textarea /></Field>\n<Checkbox label=\"Accept\" /> <Switch labelPosition=\"after\" />\n<Slider min={0} max={100} defaultValue={40} />\n<RadioGroup options={[{ value: 'a', label: 'A' }]} />\n<Combobox options={[{ key: 'ap', text: 'Apple' }]} />\n<Select options={[{ key: '1', text: 'One' }]} />`} />
       </Card>
 
       <Card>
@@ -40,6 +43,7 @@ export function ComponentsPage() {
         <Tabs defaultSelectedValue="one" tabs={[{ key: 'one', content: 'Tab One' }, { key: 'two', content: 'Tab Two' }]} />
         <Accordion items={[{ value: 'a', header: 'Section A', content: 'Alpha' }, { value: 'b', header: 'Section B', content: 'Beta' }]} />
         <Breadcrumbs items={[{ key: 'home', text: 'Home' }, { key: 'prod', text: 'Products' }]} />
+        <CodeBlock code={`<Tabs defaultSelectedValue=\"one\" tabs={[{ key: 'one', content: 'Tab One' }]} />\n<Accordion items={[{ value: 'a', header: 'A', content: 'Alpha' }]} />\n<Breadcrumbs items={[{ key: 'home', text: 'Home' }]} />`} />
       </Card>
 
       <Card>
@@ -56,6 +60,7 @@ export function ComponentsPage() {
           <Button onClick={() => setDrawerOpen(true)}>Drawer</Button>
           <Drawer open={drawerOpen} onOpenChange={(_, d) => setDrawerOpen(d.open)} title="Drawer">Content</Drawer>
         </Stack>
+        <CodeBlock code={`<Popover content={<div>...</div>}><Button>Popover</Button></Popover>\n<Menu items={[{ key: '1', text: 'Item 1' }]}><Button>Menu</Button></Menu>\n<DialogBox open={open} onOpenChange={setOpen} title=\"Confirm\">...</DialogBox>\n<Drawer open={drawerOpen} onOpenChange={...} title=\"Drawer\">...</Drawer>`} />
       </Card>
 
       <Card>
@@ -77,6 +82,7 @@ export function ComponentsPage() {
           <Subtle>Subtle text</Subtle>
           <Text>Body text example</Text>
         </Stack>
+        <CodeBlock code={`<Avatar name=\"Jane Doe\" />\n<Badge>New</Badge>\n<Spinner />\n<Progress value={0.4} />\n<Tooltip content=\"Hello\"><Button>Hover</Button></Tooltip>\n<Skeleton shape=\"rectangle\" width={120} height={24} />`} />
       </Card>
 
       <Card>
@@ -87,6 +93,7 @@ export function ComponentsPage() {
           getRowId={(r: any) => r.id}
         />
         <Pagination page={page} totalPages={5} onChange={setPage} />
+        <CodeBlock code={`<DataTable items={[{ id: '1', name: 'Alice' }]} columns={[{ id: 'name', header: 'Name', cell: (r) => r.name }]} getRowId={(r) => r.id} />\n<Pagination page={page} totalPages={5} onChange={setPage} />`} />
       </Card>
     </Stack>
   );
