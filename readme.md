@@ -45,6 +45,8 @@ export default function App() {
         <Badge>New</Badge>
         <Spinner />
         <Progress value={0.4} />
+
+        <ToggleButton>Toggle</ToggleButton>
       </Stack>
     </OrgProvider>
   );
@@ -81,6 +83,35 @@ You can also override Fluent UI theme tokens via `OrgProvider`:
 
 ```bash
 npm test
+```
+
+## Components Guide
+
+See detailed usage for every component, templating, and theming in:
+
+- `docs/COMPONENTS.md`
+
+## Templates
+
+### LoginPage
+
+Ready-to-use, customizable login page.
+
+```tsx
+import { OrgProvider, templates } from '@org/ui';
+
+export default function Login() {
+  return (
+    <OrgProvider>
+      <templates.LoginPage
+        title="Sign in"
+        subtitle="Welcome back"
+        onSubmit={({ email, password }) => {/* handle login */}}
+        vars={{ '--org-space-md': '16px' }}
+      />
+    </OrgProvider>
+  );
+}
 ```
 
 ## Publish to npm
