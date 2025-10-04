@@ -3,13 +3,16 @@ import {
   Stack, Card, Field, Input, Textarea, Checkbox, Switch, Slider, RadioGroup,
   Combobox, Select, Button, ToggleButton, Avatar, Badge, Spinner, Progress, Tooltip,
   Tabs, Accordion, Breadcrumbs, Link, Divider, Skeleton, Toolbar, Popover, Menu, Dialog, DialogTrigger, DialogBox,
-  DataTable, Pagination, Drawer, H2, H3, Subtle, Text
+  DataTable, Pagination, Drawer, H2, H3, Subtle, Text,
 } from '@org/ui';
+import { AspectRatio, HoverCard, Label, ScrollArea, Separator, Sheet, AlertDialog } from '@org/ui';
 import { CodeBlock } from '../components/CodeBlock';
 
 export function ComponentsPage() {
   const [open, setOpen] = React.useState(false);
+  const [alertOpen, setAlertOpen] = React.useState(false);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [sheetOpen, setSheetOpen] = React.useState(false);
   const [page, setPage] = React.useState(1);
 
   return (
@@ -57,10 +60,14 @@ export function ComponentsPage() {
           <DialogBox open={open} onOpenChange={setOpen} title="Confirm" onPrimary={() => setOpen(false)} onSecondary={() => setOpen(false)}>
             Are you sure?
           </DialogBox>
+          <Button onClick={() => setAlertOpen(true)}>AlertDialog</Button>
+          <AlertDialog open={alertOpen} onOpenChange={setAlertOpen} title="Heads up" description="Important action required" onAction={() => setAlertOpen(false)} />
           <Button onClick={() => setDrawerOpen(true)}>Drawer</Button>
           <Drawer open={drawerOpen} onOpenChange={(_, d) => setDrawerOpen(d.open)} title="Drawer">Content</Drawer>
+          <Button onClick={() => setSheetOpen(true)}>Sheet</Button>
+          <Sheet open={sheetOpen} onOpenChange={(_, d) => setSheetOpen(d.open)} position="end">Right side sheet</Sheet>
         </Stack>
-        <CodeBlock code={`<Popover content={<div>...</div>}><Button>Popover</Button></Popover>\n<Menu items={[{ key: '1', text: 'Item 1' }]}><Button>Menu</Button></Menu>\n<DialogBox open={open} onOpenChange={setOpen} title=\"Confirm\">...</DialogBox>\n<Drawer open={drawerOpen} onOpenChange={...} title=\"Drawer\">...</Drawer>`} />
+        <CodeBlock code={`<Popover content={<div>...</div>}><Button>Popover</Button></Popover>\n<Menu items={[{ key: '1', text: 'Item 1' }]}><Button>Menu</Button></Menu>\n<DialogBox open={open} onOpenChange={setOpen} title=\"Confirm\">...</DialogBox>\n<AlertDialog open={alertOpen} onOpenChange={setAlertOpen} title=\"Heads up\" />\n<Drawer open={drawerOpen} onOpenChange={...} title=\"Drawer\">...</Drawer>\n<Sheet open={sheetOpen} onOpenChange={...} position=\"end\">...</Sheet>`} />
       </Card>
 
       <Card>
@@ -72,6 +79,8 @@ export function ComponentsPage() {
           <Progress value={0.4} />
           <Tooltip content="Hello"><Button>Hover</Button></Tooltip>
           <Skeleton shape="rectangle" width={120} height={24} />
+          <HoverCard content={<div>Extra info</div>}><Button>HoverCard</Button></HoverCard>
+          <Separator />
           <Link href="https://github.com" target="_blank">GitHub</Link>
           <Divider />
           <Toolbar items={[{ type: 'button', key: 'save', content: 'Save' }, { type: 'divider', key: 'd' }, { type: 'toggle', key: 'bold', content: 'Bold' }]} />
@@ -94,6 +103,25 @@ export function ComponentsPage() {
         />
         <Pagination page={page} totalPages={5} onChange={setPage} />
         <CodeBlock code={`<DataTable items={[{ id: '1', name: 'Alice' }]} columns={[{ id: 'name', header: 'Name', cell: (r) => r.name }]} getRowId={(r) => r.id} />\n<Pagination page={page} totalPages={5} onChange={setPage} />`} />
+      </Card>
+
+      <Card>
+        <H2>Form & Layout Utilities</H2>
+        <Stack direction="column" gap="12px">
+          <Label htmlFor="named">Label</Label>
+          <Input id="named" placeholder="with label" />
+          <AspectRatio ratio={16/9}>
+            <Skeleton shape="rectangle" width={240} height={135} />
+          </AspectRatio>
+          <ScrollArea height={120}>
+            <div style={{ width: 600 }}>
+              {Array.from({ length: 10 }).map((_, i) => (
+                <p key={i}>Scrollable content line {i + 1}</p>
+              ))}
+            </div>
+          </ScrollArea>
+        </Stack>
+        <CodeBlock code={`<Label htmlFor=\"named\">Label</Label>\n<Input id=\"named\" />\n<AspectRatio ratio={16/9}>...</AspectRatio>\n<ScrollArea height={120}>...</ScrollArea>`} />
       </Card>
     </Stack>
   );
