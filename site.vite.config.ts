@@ -11,8 +11,12 @@ export default defineConfig(({ command }) => {
     resolve: {
       alias: {
         // Use local source during dev for instant feedback; use built dist in production build
-        '@org/ui': isBuild ? resolve(__dirname, 'dist/index.js') : resolve(__dirname, 'src'),
+        '@org/ui': isBuild ? resolve(__dirname, 'dist/index.js') : resolve(__dirname, 'src/index.ts'),
       },
+    },
+    optimizeDeps: {
+      // Prevent Vite from trying to prebundle the aliased library as a package
+      exclude: ['@org/ui'],
     },
     build: {
       outDir: resolve(__dirname, 'docs'),
