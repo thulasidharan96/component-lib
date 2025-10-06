@@ -20,7 +20,10 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && vite build",
+    "dev:site": "vite --config demo/vite.config.ts",
     "build:site": "vite build --config demo/vite.config.ts",
+    "preview:site": "vite preview --config demo/vite.config.ts --outDir docs",
+    "prepublishOnly": "npm run build",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build -o docs/storybook",
     "dev": "vite",

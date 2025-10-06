@@ -4,7 +4,15 @@ import { mergeStyleVars, type CSSVarValues } from '../utils/styleVars';
 
 export type ToolbarItem =
   | { type: 'button'; key: string; content: ReactNode; onClick?: () => void }
-  | { type: 'toggle'; key: string; content: ReactNode; defaultPressed?: boolean; onClick?: () => void }
+  | {
+      type: 'toggle';
+      key: string;
+      content: ReactNode;
+      defaultPressed?: boolean;
+      onClick?: () => void;
+      name?: string;
+      value?: string;
+    }
   | { type: 'divider'; key: string };
 
 export type ToolbarProps = FToolbarProps & { vars?: CSSVarValues; style?: CSSProperties; items?: ToolbarItem[] };
@@ -22,7 +30,12 @@ export function Toolbar({ vars, style, items, children, ...props }: ToolbarProps
                 </ToolbarButton>
               );
             return (
-              <ToolbarToggleButton key={i.key} onClick={i.onClick}>
+              <ToolbarToggleButton
+                key={i.key}
+                onClick={i.onClick}
+                name={(i as Extract<ToolbarItem, { type: 'toggle' }>).name ?? i.key}
+                value={(i as Extract<ToolbarItem, { type: 'toggle' }>).value ?? i.key}
+              >
                 {i.content}
               </ToolbarToggleButton>
             );
