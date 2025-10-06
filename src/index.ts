@@ -46,3 +46,7 @@ export * from './components/ScrollArea';
 export * from './components/Separator';
 export * from './components/Sheet';
 export * from './components/AlertDialog';
+export * from './components/Header';
+export * from './components/Navbar';
+export * from './components/Footer';
+export * from './components/Form';
