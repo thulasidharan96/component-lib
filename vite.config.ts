@@ -9,7 +9,8 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       copyDtsFiles: true,
-      include: ['src']
+      include: ['src'],
+      exclude: ['src/site/**']
     })
   ],
   build: {

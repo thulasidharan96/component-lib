@@ -125,7 +125,7 @@ Recommended: enable 2FA on your npm account.
 
 ## Host demo on GitHub Pages
 
-This repo includes a demo single-page site showcasing every component under `demo/`.
+This repo includes a demo single-page site located under `src/site/`.
 
 Build the site into `docs/` (GitHub Pages default):
 
@@ -136,6 +136,12 @@ npm run build:site
 Then enable GitHub Pages:
 
 - Settings → Pages → Build and deployment → Deploy from branch → select `docs/` folder on your default branch.
+
+Local development of the demo:
+
+```bash
+npm run dev:site
+```
 
 ## Development
 
