@@ -21,11 +21,10 @@
     "clean": "rimraf dist",
     "build": "npm run clean && vite build",
     "dev:site": "vite --config site.vite.config.ts",
-    "build:site": "vite build --config site.vite.config.ts",
+    "build:site": "npm run build && vite build --config site.vite.config.ts",
     "preview:site": "vite preview --config site.vite.config.ts --outDir docs",
     "prepublishOnly": "npm run build",
-    "storybook": "storybook dev -p 6006",
-    "build:storybook": "storybook build -o docs/storybook",
+    
     "dev": "vite",
     "test": "vitest run --reporter=verbose",
     "test:watch": "vitest",

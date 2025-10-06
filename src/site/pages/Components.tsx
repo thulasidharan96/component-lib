@@ -3,7 +3,7 @@ import {
   Stack, Card, Field, Input, Textarea, Checkbox, Switch, Slider, RadioGroup,
   Combobox, Select, Button, ToggleButton, Avatar, Badge, Spinner, Progress, Tooltip,
   Tabs, Accordion, Breadcrumbs, Link, Divider, Skeleton, Toolbar, Popover, Menu, Dialog, DialogTrigger, DialogBox,
-  DataTable, Pagination, Drawer, H2, H3, Subtle, Text,
+  DataTable, Pagination, Drawer, H2, H3, Subtle, Text, Header, Navbar, Footer, Form, FormRow, FormActions,
 } from '@org/ui';
 import { AspectRatio, HoverCard, Label, ScrollArea, Separator, Sheet, AlertDialog } from '@org/ui';
 import { CodeBlock } from '../components/CodeBlock';
@@ -17,6 +17,26 @@ export function ComponentsPage() {
 
   return (
     <Stack direction="column" gap="24px">
+      <Card>
+        <H2>Layout: Header, Navbar, Footer</H2>
+        <Header logo={<div style={{ width: 28, height: 28, borderRadius: 6, background: '#fff' }} />} left={<Text>Logo</Text>} center={<Text>Title</Text>} right={<Button>Action</Button>} />
+        <Navbar items={[{ key: 'home', content: 'Home' }, { key: 'docs', content: 'Docs' }, { key: 'about', content: 'About' }]} />
+        <div style={{ padding: 12 }}>Page content here</div>
+        <Footer left={<Text>© 2025</Text>} center={<Text>Center</Text>} right={<Text>v0.1.0</Text>} />
+        <CodeBlock code={`<Header left={<Text>Logo</Text>} center={<Text>Title</Text>} right={<Button>Action</Button>} />\n<Navbar items={[{ key: 'home', content: 'Home' }]} />\n<Footer left={<Text>© 2025</Text>} right={<Text>v0.1.0</Text>} />`} />
+      </Card>
+
+      <Card>
+        <H2>Forms</H2>
+        <Form onSubmit={(e) => { e.preventDefault(); }}>
+          <FormRow label={<Field label="Email" />} input={<Input placeholder="email@example.com" />} />
+          <FormRow label={<Field label="Password" />} input={<Input type="password" placeholder="••••••" />} />
+          <FormActions>
+            <Button appearance="primary" type="submit">Submit</Button>
+            <Button type="reset">Reset</Button>
+          </FormActions>
+        </Form>
+      </Card>
       <Card>
         <H2>Buttons</H2>
         <Stack gap="12px">
